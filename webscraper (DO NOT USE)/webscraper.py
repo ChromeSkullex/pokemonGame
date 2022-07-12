@@ -13,7 +13,7 @@ Returns: Json of Pokemon information
 
 def get_poke_stats(link):
     pokemon_full_stats = {}  # Returns
-
+    http = httplib2.Http()
     #  html BeautifulSoup things
     html_link_poke = link
     status, response = http.request(html_link_poke)
@@ -85,12 +85,13 @@ def get_poke_stats(link):
             stat_num = float(stat.find('td', 'cell-num').text)
             stat_json.update({stat_title: {"title": stat.find('th').text, "base_num": stat_num}})
     # print(stat_json)
-    pokemon_full_stats.update({poke_title: {"title": poke_name, "img": poke_img_link,"efficiency": json_poke_dict, "allowed_moves": allowed_moves,
+    pokemon_full_stats.update({poke_title: {"title": poke_name, "img": poke_img_link, "efficiency": json_poke_dict,
+                                            "allowed_moves": allowed_moves,
                                             "base_stat": stat_json}})
     return pokemon_full_stats
 
 
-if __name__ == '__main__':
+def create_pokemon_json():
     http = httplib2.Http()
     html_link_main = "https://pokemondb.net/pokedex/stats/gen1"
     status, response = http.request(html_link_main)
@@ -105,6 +106,64 @@ if __name__ == '__main__':
 
     with open('../RAWDATA/pokemon.json', 'w') as f:
         json.dump(poke_arr, f, indent=4)
+
+
+def create_moveset_json():
+    http = httplib2.Http()
+    html_link_main = "https://pokemondb.net/move/generation/1"
+    status, response = http.request(html_link_main)
+    soup = BeautifulSoup(response, "lxml")
+    moveset_json = {}
+    move_list = soup.find('table', id='moves').find_all('tr')
+    for move_set in move_list:
+        move_set_json = {}
+        """{
+            "absorb":{
+                "title":"Absorb",
+                "type": "grass", 
+                "move_stat":{
+                    "power":20,
+                    "acc":100,
+                    "pp":25
+                },
+                "effect": "sentence"
+            }
+        
+        }"""
+        if move_set.find('td', 'cell-name'):
+            move_name = move_set.find('td', 'cell-name').find('a').text
+            move_type = move_set.find('td', 'cell-icon').find('a', 'type-icon').text
+            move_cat = move_set.find('td', 'cell-icon text-center').find('img')['title']
+            move_stats = move_set.find_all('td', 'cell-num')
+            move_eff = move_set.find('td', 'cell-long-text').text
+
+            move_power = 0
+            move_acc = 0
+            move_pp = 0
+            for i in range(3):
+                if move_stats[i].text == '—' and i == 0:
+                    move_power = 0
+                elif i == 0:
+                    move_power = float(move_stats[i].text)
+                if move_stats[i].text == '—' and i == 1:
+                    move_acc = 0
+                elif move_stats[i].text == '∞' and i == 1:
+                    move_acc = float('inf')
+                elif i == 1:
+                    move_acc = float(move_stats[i].text)
+                if move_stats[i].text == '—' and i == 2:
+                    move_pp = 0
+                elif i == 2:
+                    move_pp = float(move_stats[i].text)
+            move_stat_json = {'power': move_power, 'acc': move_acc, 'pp': move_pp}
+            moveset_json.update({move_name.lower().replace(" ", "_"): {'title': move_name, 'type': move_type.lower(),
+                                                                        'cat': move_cat.lower(), 'stats': move_stat_json
+                                                                    , 'effect': move_eff}})
+    with open('../RAWDATA/moveset.json', 'w') as f:
+        json.dump(moveset_json, f, indent=4)
+
+if __name__ == '__main__':
+    create_pokemon_json()
 
 
 """
