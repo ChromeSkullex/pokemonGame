@@ -85,7 +85,7 @@ def get_poke_stats(link):
             stat_num = float(stat.find('td', 'cell-num').text)
             stat_json.update({stat_title: {"title": stat.find('th').text, "base_num": stat_num}})
     # print(stat_json)
-    pokemon_full_stats.update({poke_title: {"title": poke_name, "img": poke_img_link, "allowed_moves": allowed_moves,
+    pokemon_full_stats.update({poke_title: {"title": poke_name, "img": poke_img_link,"efficiency": json_poke_dict, "allowed_moves": allowed_moves,
                                             "base_stat": stat_json}})
     return pokemon_full_stats
 
