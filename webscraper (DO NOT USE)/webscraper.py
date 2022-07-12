@@ -3,21 +3,35 @@ import httplib2
 import json
 import lxml
 
+"""
+Gets the pokemon stats from the website, this then parse the data into a json which is created in the web scraper
+folder. 
+link: link of the pokemon pages
+Returns: Json of Pokemon information
+"""
+
 
 def get_poke_stats(link):
-    pokemon_full_stats = {}
+    pokemon_full_stats = {}  # Returns
+
+    #  html BeautifulSoup things
     html_link_poke = link
     status, response = http.request(html_link_poke)
     soup = BeautifulSoup(response, "lxml")
     poke_type_html = soup.find('table', 'vitals-table').find_all('a', 'type-icon')
-    poke_name = soup.find('h1').text
-    poke_title = link.split("/")[-1]
-    #print(poke_name)
-    poke_type = []
-    poke_img_link = ""
+
+    # Web Scraper
+    poke_name = soup.find('h1').text  # Gets Name
+    poke_title = link.split("/")[-1]  # Gets Pokemon Link name (eg. Venusaur -> venusaur-f)
+    # print(poke_name)
+    poke_type = []  # Stores the type of pokemon, some can have up to two
+    poke_img_link = ""  # Stores the image link to be used later
+
+    # For loop to append type
     for type_ in poke_type_html:
         poke_type.append(str(type_.contents[0]))
 
+    # Getting image link
     poke_img_tag = soup.find('table', 'data-table sprites-table sprites-history-table').find_all('img',
                                                                                                  'img-fixed '
                                                                                                  'img-sprite-v11')
@@ -25,8 +39,9 @@ def get_poke_stats(link):
         poke_img_link = poke_img_tag[0]['src']
     else:
         print("Issue with " + poke_name)
-    #print(poke_img_link)
+    # print(poke_img_link)
 
+    # Getting Def type (Although this can be moved to just move set table DB)
     table_tag = soup.find_all('table', 'type-table type-table-pokedex')
     json_poke_dict = {}
     for i in range(2):
@@ -47,7 +62,9 @@ def get_poke_stats(link):
             else:
                 type_float = float(type_num)
             json_poke_dict.update({type_name.lower(): {"title": type_name, "effect": type_float, "sentence": type_sen}})
-    #print(json_poke_dict)
+    # print(json_poke_dict)
+
+    # Scrapes the allowed moves (SET TO ONLY BY LEVEL)
     move_table = soup.find('div', 'grid-col span-lg-6').find('table', 'data-table').find_all('tr')
     allowed_moves = []
     for move in move_table:
@@ -57,7 +74,9 @@ def get_poke_stats(link):
             move_text = move_tag.text
         if move_text:
             allowed_moves.append(move_text.lower().replace(" ", "_"))
-    #print(allowed_moves)
+    # print(allowed_moves)
+
+    # Scrapes the Base Stats (ONLY BASE STATS)
     stat_table = soup.find('div', 'grid-col span-md-12 span-lg-8').find('table', 'vitals-table').find_all('tr')
     stat_json = {}
     for stat in stat_table:
@@ -65,7 +84,7 @@ def get_poke_stats(link):
             stat_title = stat.find('th').text.lower().replace(" ", "_")
             stat_num = float(stat.find('td', 'cell-num').text)
             stat_json.update({stat_title: {"title": stat.find('th').text, "base_num": stat_num}})
-    #print(stat_json)
+    # print(stat_json)
     pokemon_full_stats.update({poke_title: {"title": poke_name, "img": poke_img_link, "allowed_moves": allowed_moves,
                                             "base_stat": stat_json}})
     return pokemon_full_stats
@@ -86,8 +105,7 @@ if __name__ == '__main__':
 
     with open('../RAWDATA/pokemon.json', 'w') as f:
         json.dump(poke_arr, f, indent=4)
-    json_object = json.dumps(poke_arr, indent=4)
-    print(json_object)
+
 
 """
 DO NOT DELETE
