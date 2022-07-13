@@ -12,10 +12,22 @@ div {
     min-height: 100%;
     position: relative;
 }
-.navbar{
-    display: block;
-    color:white;
+a{
+
+    text-decoration: none;
+    color: #868686 ;
 }
+.navbar .nav-link{
+    display: block;
+    text-decoration: none;
+    color: #868686 ;
+    padding: 0.5rem 1rem;
+}
+
+.nav-link:hover{
+    color: #b6b6b6;
+}
+
 .nav-wrap{
     background: #222;
     display: flex;
@@ -26,21 +38,23 @@ div {
 }
 
 .nav-icon{
-    display: flex!important;
+    display: flex;
     margin-right: 1rem;
     margin-left: 2rem;
-    align-items: center!important;
+    align-items: center;
 }
 .element{
     opacity: 0;
 }
 .navbar-nav{
     display: flex;
+
 }
 .navbar-item{
     display: flex;
     list-style: none;
     margin-right: 1rem!important;
+    color:  #868686;
 }
 .banner{
     height:250px;
