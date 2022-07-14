@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="47aa957b-e40b-4049-9d83-f926058b9427" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/battle.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/catch.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSS/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/banner_placeholder.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/img/banner_placeholder.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/battle.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game/battle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/catch.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game/catch.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/auth/register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,13 +41,21 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/xampp/htdocs/Project",
+    "last_opened_file_path": "C:/xampp/htdocs/Project/pokemonGame",
+    "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\Project\pokemonGame" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\Project\pokemonGame\static" />
       <recent name="C:\xampp\htdocs\Project\pokemonGame\templates" />
+      <recent name="C:\xampp\htdocs\Project\pokemonGame" />
+      <recent name="C:\xampp\htdocs\Project\pokemonGame\flaskProject\templates\game" />
+      <recent name="C:\xampp\htdocs\Project\pokemonGame\flaskProject\templates\auth" />
     </key>
   </component>
   <component name="RunManager">
