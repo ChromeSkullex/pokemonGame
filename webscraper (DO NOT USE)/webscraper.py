@@ -24,12 +24,12 @@ def get_poke_stats(link):
     poke_name = soup.find('h1').text  # Gets Name
     poke_title = link.split("/")[-1]  # Gets Pokemon Link name (eg. Venusaur -> venusaur-f)
     # print(poke_name)
-    poke_type = []  # Stores the type of pokemon, some can have up to two
+    poke_type = {}  # Stores the type of pokemon, some can have up to two
     poke_img_link = ""  # Stores the image link to be used later
 
     # For loop to append type
     for type_ in poke_type_html:
-        poke_type.append(str(type_.contents[0]))
+        poke_type.update({str(type_.contents[0].lower()):str(type_.contents[0])})
 
     # Getting image link
     poke_img_tag = soup.find('table', 'data-table sprites-table sprites-history-table').find_all('img',
@@ -66,14 +66,14 @@ def get_poke_stats(link):
 
     # Scrapes the allowed moves (SET TO ONLY BY LEVEL)
     move_table = soup.find('div', 'grid-col span-lg-6').find('table', 'data-table').find_all('tr')
-    allowed_moves = []
+    allowed_moves = {}
     for move in move_table:
         move_tag = move.find('a', 'ent-name')
         move_text = ""
         if move_tag:
             move_text = move_tag.text
         if move_text:
-            allowed_moves.append(move_text.lower().replace(" ", "_"))
+            allowed_moves.update({move_text.lower().replace(" ", "_"):move_text})
     # print(allowed_moves)
 
     # Scrapes the Base Stats (ONLY BASE STATS)
@@ -85,7 +85,7 @@ def get_poke_stats(link):
             stat_num = float(stat.find('td', 'cell-num').text)
             stat_json.update({stat_title: {"title": stat.find('th').text, "base_num": stat_num}})
     # print(stat_json)
-    pokemon_full_stats.update({poke_title: {"title": poke_name, "img": poke_img_link, "efficiency": json_poke_dict,
+    pokemon_full_stats.update({poke_title: {"title": poke_name, "img": poke_img_link, "type":poke_type, "efficiency": json_poke_dict,
                                             "allowed_moves": allowed_moves,
                                             "base_stat": stat_json}})
     return pokemon_full_stats
