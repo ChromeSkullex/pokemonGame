@@ -11657,7 +11657,7 @@
         }
     },
     "farfetchd": {
-        "title": "Farfetch'd",
+        "title": "Farfetchd",
         "img": "https://img.pokemondb.net/sprites/black-white/normal/farfetchd.png",
         "type": {
             "normal": "Normal",
