@@ -8,8 +8,9 @@
         // Create database if it hasn't been created, saved locally
         try{
 
+
             $link = new PDO("mysql:host=$server", $username, $password);
-            $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $link->setAttribute("SET NAMES 'utf8'", PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             // Creating Database and table, initilizing
             $db_name = "`".str_replace("`","``",$db_name)."`";
@@ -37,7 +38,7 @@
                     $sql_find = "SELECT COUNT(*) FROM poke_stat WHERE id_name='".$poke_name_id. "'";
                     $result = $link->query($sql_find);
                     $num_find = $result->fetch();
-                    print_r($num_find[0]);
+                    print_r($allowed_moveset);
                     if ($num_find[0] < 1){
                         $sql = "INSERT INTO poke_stat(id_name, display_name, img_link, type_name, allowed_moveset, efficiency, 
                       base_stat) VALUES ('$poke_name_id', '$display_name', '$img_link', '$type_name', '$allowed_moveset', '$efficiency', '$base_stat')";
@@ -46,25 +47,39 @@
                         echo "Created<p>";
                     }
                     echo "<p>";
-                    /*
-                    $sql_find = "SELECT COUNT(*) FROM poke_stat WHERE id_name='".$poke_name_id. "'";
-                    $result = $link->query($sql_find);
-                    $num_find = $result->fetch();
-                    print_r($num_find[0]);
 
-                    $sql = "INSERT IGNORE INTO poke_stat(id_name, display_name, img_link, type_name, allowed_moveset, efficiency, 
-                      base_stat) VALUES ('$poke_name_id', '$display_name', '$img_link', '$type_name', '$allowed_moveset', '$efficiency', '$base_stat')";
+                }
+                $json_obj_move = file_get_contents("../RAWDATA/moveset.json");
+                $json_move = json_decode($json_obj_move, true);
+                foreach ($json_move as $key=> $move_name){
+
+                    $move_name_id = $key;
+                    $display_name = $json_move[$move_name_id]['title'];
+                    $type_name = $json_move[$move_name_id]['type'] ;
+                    $cat = $json_move[$move_name_id]['cat'];
+                    $stats= json_encode($json_move[$move_name_id]['stats']);
+                    $effect = $json_move[$move_name_id]['effect'];
+                    print_r("$effect<p>");
+
+                    $sql = "INSERT INTO moveset(id_name, title, type, cat, effect) VALUES 
+                                                                  ('$move_name_id', '$display_name', '$type_name', '$cat', '$effect')";
                     $link->exec($sql);
 
-                    echo "Created";*/
                     /*
-                    if ($num_find[0] < 1){
-                        $sql = "INSERT IGNORE INTO poke_stat(id_name, display_name, img_link, type_name, allowed_moveset, efficiency, 
-                      base_stat) VALUES ('$poke_name_id', '$display_name', '$img_link', '$type_name', '$allowed_moveset', '$efficiency', '$base_stat')";
-                        $link->exec($sql);
+                                echo "$display_name, $type_name    ";
+                                $sql_find = "SELECT COUNT(*) FROM moveset WHERE id_name='".$move_name_id. "'";
+                                $result = $link->query($sql_find);
+                                $num_find = $result->fetch();
+                                print_r($num_find[0]);
+                                if ($num_find[0] < 1){
+                                    $sql = "INSERT INTO moveset(id_name, title, type, cat, stats, effect,
+                                  base_stat) VALUES ('$move_name_id', '$display_name', '$type_name', '$type_name', '$cat', '$stats', '$effect')";
+                                    $link->exec($sql);
 
-                        echo "Created";
-                    }*/
+                                    echo "Created<p>";
+                                }
+                                echo "<p>";*/
+
                 }
 
 

@@ -25,10 +25,10 @@ CREATE TABLE IF NOT EXISTS poke_stat(
 
 CREATE TABLE IF NOT EXISTS moveset(
     id INT NOT NULL PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    id_name VARCHAR(20),
-    title VARCHAR(20),
-    type VARCHAR(20),
-    cat VARCHAR(20),
+    id_name VARCHAR(100),
+    title VARCHAR(100),
+    type VARCHAR(100),
+    cat VARCHAR(100),
     stats JSON,
-    effect VARCHAR(250)
+    effect LONGTEXT
 );

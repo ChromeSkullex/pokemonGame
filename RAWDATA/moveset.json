@@ -19,7 +19,7 @@
             "acc": 100.0,
             "pp": 30.0
         },
-        "effect": "May lower opponent's Special Defense."
+        "effect": "May lower opponents Special Defense."
     },
     "acid_armor": {
         "title": "Acid Armor",
@@ -30,7 +30,7 @@
             "acc": 0,
             "pp": 20.0
         },
-        "effect": "Sharply raises user's Defense."
+        "effect": "Sharply raises users Defense."
     },
     "agility": {
         "title": "Agility",
@@ -41,7 +41,7 @@
             "acc": 0,
             "pp": 30.0
         },
-        "effect": "Sharply raises user's Speed."
+        "effect": "Sharply raises users Speed."
     },
     "amnesia": {
         "title": "Amnesia",
@@ -52,7 +52,7 @@
             "acc": 0,
             "pp": 20.0
         },
-        "effect": "Sharply raises user's Special Defense."
+        "effect": "Sharply raises users Special Defense."
     },
     "aurora_beam": {
         "title": "Aurora Beam",
@@ -63,7 +63,7 @@
             "acc": 100.0,
             "pp": 20.0
         },
-        "effect": "May lower opponent's Attack."
+        "effect": "May lower opponents Attack."
     },
     "barrage": {
         "title": "Barrage",
@@ -85,7 +85,7 @@
             "acc": 0,
             "pp": 20.0
         },
-        "effect": "Sharply raises user's Defense."
+        "effect": "Sharply raises users Defense."
     },
     "bide": {
         "title": "Bide",
@@ -173,7 +173,7 @@
             "acc": 100.0,
             "pp": 30.0
         },
-        "effect": "May lower opponent's Speed."
+        "effect": "May lower opponents Speed."
     },
     "bubble_beam": {
         "title": "Bubble Beam",
@@ -184,7 +184,7 @@
             "acc": 100.0,
             "pp": 20.0
         },
-        "effect": "May lower opponent's Speed."
+        "effect": "May lower opponents Speed."
     },
     "clamp": {
         "title": "Clamp",
@@ -239,7 +239,7 @@
             "acc": 100.0,
             "pp": 35.0
         },
-        "effect": "May lower opponent's Speed by one stage."
+        "effect": "May lower opponents Speed by one stage."
     },
     "conversion": {
         "title": "Conversion",
@@ -250,7 +250,7 @@
             "acc": 0,
             "pp": 30.0
         },
-        "effect": "Changes user's type to that of its first move."
+        "effect": "Changes users type to that of its first move."
     },
     "counter": {
         "title": "Counter",
@@ -294,7 +294,7 @@
             "acc": 0,
             "pp": 40.0
         },
-        "effect": "Raises user's Defense."
+        "effect": "Raises users Defense."
     },
     "dig": {
         "title": "Dig",
@@ -316,7 +316,7 @@
             "acc": 100.0,
             "pp": 20.0
         },
-        "effect": "Opponent can't use its last attack for a few turns."
+        "effect": "Opponent cant use its last attack for a few turns."
     },
     "dizzy_punch": {
         "title": "Dizzy Punch",
@@ -360,7 +360,7 @@
             "acc": 0,
             "pp": 15.0
         },
-        "effect": "Raises user's Evasiveness."
+        "effect": "Raises users Evasiveness."
     },
     "double-edge": {
         "title": "Double-Edge",
@@ -514,7 +514,7 @@
             "acc": 100.0,
             "pp": 20.0
         },
-        "effect": "Lowers opponent's Accuracy."
+        "effect": "Lowers opponents Accuracy."
     },
     "fly": {
         "title": "Fly",
@@ -580,7 +580,7 @@
             "acc": 100.0,
             "pp": 40.0
         },
-        "effect": "Lowers opponent's Attack."
+        "effect": "Lowers opponents Attack."
     },
     "growth": {
         "title": "Growth",
@@ -591,7 +591,7 @@
             "acc": 0,
             "pp": 20.0
         },
-        "effect": "Raises user's Attack and Special Attack."
+        "effect": "Raises users Attack and Special Attack."
     },
     "guillotine": {
         "title": "Guillotine",
@@ -624,7 +624,7 @@
             "acc": 0,
             "pp": 30.0
         },
-        "effect": "Raises user's Defense."
+        "effect": "Raises users Defense."
     },
     "haze": {
         "title": "Haze",
@@ -778,7 +778,7 @@
             "acc": 80.0,
             "pp": 15.0
         },
-        "effect": "Lowers opponent's Accuracy."
+        "effect": "Lowers opponents Accuracy."
     },
     "leech_life": {
         "title": "Leech Life",
@@ -811,7 +811,7 @@
             "acc": 100.0,
             "pp": 30.0
         },
-        "effect": "Lowers opponent's Defense."
+        "effect": "Lowers opponents Defense."
     },
     "lick": {
         "title": "Lick",
@@ -866,7 +866,7 @@
             "acc": 0,
             "pp": 40.0
         },
-        "effect": "Raises user's Attack."
+        "effect": "Raises users Attack."
     },
     "mega_drain": {
         "title": "Mega Drain",
@@ -921,7 +921,7 @@
             "acc": 0,
             "pp": 10.0
         },
-        "effect": "Copies the opponent's last move."
+        "effect": "Copies the opponents last move."
     },
     "minimize": {
         "title": "Minimize",
@@ -932,7 +932,7 @@
             "acc": 0,
             "pp": 10.0
         },
-        "effect": "Sharply raises user's Evasiveness."
+        "effect": "Sharply raises users Evasiveness."
     },
     "mirror_move": {
         "title": "Mirror Move",
@@ -943,7 +943,7 @@
             "acc": 0,
             "pp": 20.0
         },
-        "effect": "User performs the opponent's last move."
+        "effect": "User performs the opponents last move."
     },
     "mist": {
         "title": "Mist",
@@ -954,7 +954,7 @@
             "acc": 0,
             "pp": 30.0
         },
-        "effect": "User's stats cannot be changed for a period of time."
+        "effect": "Users stats cannot be changed for a period of time."
     },
     "night_shade": {
         "title": "Night Shade",
@@ -965,7 +965,7 @@
             "acc": 100.0,
             "pp": 15.0
         },
-        "effect": "Inflicts damage equal to user's level."
+        "effect": "Inflicts damage equal to users level."
     },
     "pay_day": {
         "title": "Pay Day",
@@ -1075,7 +1075,7 @@
             "acc": 100.0,
             "pp": 10.0
         },
-        "effect": "May lower opponent's Special Defense."
+        "effect": "May lower opponents Special Defense."
     },
     "psywave": {
         "title": "Psywave",
@@ -1086,7 +1086,7 @@
             "acc": 100.0,
             "pp": 15.0
         },
-        "effect": "Inflicts damage 50-150% of user's level."
+        "effect": "Inflicts damage 50-150% of users level."
     },
     "quick_attack": {
         "title": "Quick Attack",
@@ -1108,7 +1108,7 @@
             "acc": 100.0,
             "pp": 20.0
         },
-        "effect": "Raises user's Attack when hit."
+        "effect": "Raises users Attack when hit."
     },
     "razor_leaf": {
         "title": "Razor Leaf",
@@ -1218,7 +1218,7 @@
             "acc": 100.0,
             "pp": 15.0
         },
-        "effect": "Lowers opponent's Accuracy."
+        "effect": "Lowers opponents Accuracy."
     },
     "scratch": {
         "title": "Scratch",
@@ -1240,7 +1240,7 @@
             "acc": 85.0,
             "pp": 40.0
         },
-        "effect": "Sharply lowers opponent's Defense."
+        "effect": "Sharply lowers opponents Defense."
     },
     "seismic_toss": {
         "title": "Seismic Toss",
@@ -1251,7 +1251,7 @@
             "acc": 100.0,
             "pp": 20.0
         },
-        "effect": "Inflicts damage equal to user's level."
+        "effect": "Inflicts damage equal to users level."
     },
     "self-destruct": {
         "title": "Self-Destruct",
@@ -1273,7 +1273,7 @@
             "acc": 0,
             "pp": 30.0
         },
-        "effect": "Raises user's Attack."
+        "effect": "Raises users Attack."
     },
     "sing": {
         "title": "Sing",
@@ -1372,7 +1372,7 @@
             "acc": 100.0,
             "pp": 20.0
         },
-        "effect": "Lowers opponent's Accuracy."
+        "effect": "Lowers opponents Accuracy."
     },
     "soft-boiled": {
         "title": "Soft-Boiled",
@@ -1427,7 +1427,7 @@
             "acc": 0,
             "pp": 40.0
         },
-        "effect": "Doesn't do ANYTHING."
+        "effect": "Doesnt do ANYTHING."
     },
     "spore": {
         "title": "Spore",
@@ -1471,7 +1471,7 @@
             "acc": 95.0,
             "pp": 40.0
         },
-        "effect": "Sharply lowers opponent's Speed."
+        "effect": "Sharply lowers opponents Speed."
     },
     "struggle": {
         "title": "Struggle",
@@ -1526,7 +1526,7 @@
             "acc": 90.0,
             "pp": 10.0
         },
-        "effect": "Always takes off half of the opponent's HP."
+        "effect": "Always takes off half of the opponents HP."
     },
     "supersonic": {
         "title": "Supersonic",
@@ -1556,7 +1556,7 @@
         "cat": "special",
         "stats": {
             "power": 60.0,
-            "acc": Infinity,
+            "acc": 1000,
             "pp": 20.0
         },
         "effect": "Ignores Accuracy and Evasiveness."
@@ -1570,7 +1570,7 @@
             "acc": 0,
             "pp": 20.0
         },
-        "effect": "Sharply raises user's Attack."
+        "effect": "Sharply raises users Attack."
     },
     "tackle": {
         "title": "Tackle",
@@ -1592,7 +1592,7 @@
             "acc": 100.0,
             "pp": 30.0
         },
-        "effect": "Lowers opponent's Defense."
+        "effect": "Lowers opponents Defense."
     },
     "take_down": {
         "title": "Take Down",
@@ -1801,7 +1801,7 @@
             "acc": 0,
             "pp": 40.0
         },
-        "effect": "Raises user's Defense."
+        "effect": "Raises users Defense."
     },
     "wrap": {
         "title": "Wrap",
