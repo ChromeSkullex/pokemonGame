@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS users(
     display_name VARCHAR(20),
     username VARCHAR(20),
     user_password VARCHAR(20),
+    owned_pokemon JSON,
     active_pokemon JSON
 );
 CREATE TABLE IF NOT EXISTS poke_actor(

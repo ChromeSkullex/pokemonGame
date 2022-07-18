@@ -283,7 +283,7 @@
             "acc": 95.0,
             "pp": 30.0
         },
-        "effect": ""
+        "effect": "Cut deals damage with no additional effect in battle."
     },
     "defense_curl": {
         "title": "Defense Curl",
