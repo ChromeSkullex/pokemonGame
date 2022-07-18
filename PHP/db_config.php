@@ -10,7 +10,8 @@
 
 
             $link = new PDO("mysql:host=$server", $username, $password);
-            $link->setAttribute("SET NAMES 'utf8'", PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //"SET NAMES 'utf8'"
+            $link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             // Creating Database and table, initilizing
             $db_name = "`".str_replace("`","``",$db_name)."`";
@@ -34,11 +35,11 @@
                     $allowed_moveset = json_encode($json_poke[$poke_name_id]['efficiency']);
                     $efficiency = json_encode($json_poke[$poke_name_id]['allowed_moves']);
                     $base_stat = json_encode($json_poke[$poke_name_id]['base_stat']);
-                    echo "$display_name, $img_link    ";
+                    //echo "$display_name, $img_link    ";
                     $sql_find = "SELECT COUNT(*) FROM poke_stat WHERE id_name='".$poke_name_id. "'";
                     $result = $link->query($sql_find);
                     $num_find = $result->fetch();
-                    print_r($allowed_moveset);
+                    //print_r($allowed_moveset);
                     if ($num_find[0] < 1){
                         $sql = "INSERT INTO poke_stat(id_name, display_name, img_link, type_name, allowed_moveset, efficiency, 
                       base_stat) VALUES ('$poke_name_id', '$display_name', '$img_link', '$type_name', '$allowed_moveset', '$efficiency', '$base_stat')";
@@ -59,11 +60,20 @@
                     $cat = $json_move[$move_name_id]['cat'];
                     $stats= json_encode($json_move[$move_name_id]['stats']);
                     $effect = $json_move[$move_name_id]['effect'];
-                    print_r("$effect<p>");
 
-                    $sql = "INSERT INTO moveset(id_name, title, type, cat, effect) VALUES 
-                                                                  ('$move_name_id', '$display_name', '$type_name', '$cat', '$effect')";
-                    $link->exec($sql);
+
+
+                    $sql_find = "SELECT COUNT(*) FROM moveset WHERE id_name='".$move_name_id. "'";
+                    $result = $link->query($sql_find);
+                    $num_find = $result->fetch();
+                    if ($num_find[0] < 1){
+                        $sql = "INSERT INTO moveset(id_name, title, type, cat, stats, effect) VALUES 
+                                                                  ('$move_name_id', '$display_name', '$type_name', '$cat', '$stats', '$effect')";
+                        $link->exec($sql);
+
+                        echo "Created<p>";
+                    }
+                    echo "<p>";
 
                     /*
                                 echo "$display_name, $type_name    ";
