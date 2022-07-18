@@ -157,11 +157,13 @@ input{
 
 canvas{
     background-color: white;
+    position: absolute;
+
     border: 1px solid black;
 }
 
 .game_container{
-    display: flex;
+    position: fixed;
     margin: 0;
     align-items: center;
     justify-content: center;
