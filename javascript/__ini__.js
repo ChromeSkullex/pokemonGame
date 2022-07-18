@@ -1,7 +1,10 @@
 $(document).ready(function(){
     $.ajax({
         url: '../PHP/db_config.php',
-        success: function(d){
+        async: false,
+        success(e) {
+            console.log(e);
         }
     })
 });
+

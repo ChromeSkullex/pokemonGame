@@ -45,9 +45,7 @@
                       base_stat) VALUES ('$poke_name_id', '$display_name', '$img_link', '$type_name', '$allowed_moveset', '$efficiency', '$base_stat')";
                             $link->exec($sql);
 
-                            echo "Created<p>";
                         }
-                        echo "<p>";
 
                     }
                     $json_obj_move = file_get_contents("../RAWDATA/moveset.json");
@@ -71,9 +69,7 @@
                                                                   ('$move_name_id', '$display_name', '$type_name', '$cat', '$stats', '$effect')";
                             $link->exec($sql);
 
-                            echo "Created<p>";
                         }
-                        echo "<p>";
 
                         /*
                                     echo "$display_name, $type_name    ";
@@ -92,6 +88,7 @@
 
                     }
 
+                    echo "created";
 
                 }
             }
