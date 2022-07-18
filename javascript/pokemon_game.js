@@ -8,7 +8,7 @@ const PLAYER_ORI_POS = -2 * IMG_OFFSET;
 
 var poke_json;
 var poke_json_ene;
-var poke_choice = 0;
+var poke_choice;
 
 
 var poke_health = 100;
@@ -44,6 +44,7 @@ $(document).ready(function (){
 function ini_game(){
    poke_actors = [];
    ene_actors = [];
+   poke_choice = 0;
    for (var i = 0; i < 6; i++){
       let ran_poke = Math.floor((Math.random() * 151) + 1);
       console.log(ran_poke)
@@ -133,31 +134,22 @@ function game_start(){
             }
          }
          else if (show_team){
-            var team_choice = button_team(ctx);
+            var team_choice = button_team(ctx, c, e);
             if (team_choice === poke_choice){
                console.log("Same")
             }
+            else if(team_choice === -1){
+               console.log("No choice")
+            }
             else {
-               switch (team_choice){
-                  case 1:
-                     console.log(1);
-                     break;
-                  case 2:
-                     console.log(2);
-                     break;
-                  case 3:
-                     console.log(3);
-                     break;
-                  case 4:
-                     console.log(4);
-                     break;
-                  case 5:
-                     console.log(5);
-                     break;
-                  case 6:
-                     console.log(6);
-                     break;
-               }
+               poke_json = poke_actors[team_choice];
+               console.log(poke_json);
+               ctx.drawImage(background_img, 0, -90)
+               load_trainer(ctx);
+               load_player(ctx);
+               load_UI(ctx)
+               poke_choice= team_choice;
+               show_team = false;
             }
             if (mouseX > 470 && mouseX < 670 && mouseY > 425 && mouseY < 460){
                load_UI(ctx)
@@ -276,16 +268,28 @@ function load_team(ctx){
          ctx.drawImage(poke_img_loop, imgX, 400);
          imgX+=60;
       }
-
       console.log(poke_img_loop)
-
-
    }
    buttons_UI(ctx, CANVAS_WIDTH-250,425, "Back")
 }
 
-function button_team(ctx){
+function button_team(ctx, c, e){
+   const canvas = c.getBoundingClientRect();
+   var mouseX = ((e.clientX - canvas.left) / (canvas.right - canvas.left)) * c.width;
+   var mouseY = ((e.clientY - canvas.top) / (canvas.bottom  - canvas.top)) * c.height;
+   console.log(mouseX, mouseY);
+   var posX = 10;
+   for (var i = 0 ; i < 6; i++){
+      if(mouseX > posX && mouseX < posX+50 && mouseY > 425 && mouseY<475){
+         console.log("1")
+         return i;
+      }
+      posX+=60;
+   }
 
+
+
+   return -1;
 }
 
 function load_UI(ctx){
