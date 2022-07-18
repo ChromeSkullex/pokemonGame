@@ -1,19 +1,20 @@
 const IMG_OFFSET = 100;
 const IMG_HEIGHT = 150;
 const CANVAS_WIDTH = 720;
+const CANVAS_TRUE_HEIGHT= 500;
 const CANVAS_HEIGHT = 300;
 const IMG_SCALE = 192
 const PLAYER_ORI_POS = -2 * IMG_OFFSET;
-var poke_actor = 2; // Temp
-var poke_json;
 
-var poke_ene = 5;
+var poke_json;
 var poke_json_ene;
+var poke_choice = 0;
+
 
 var poke_health = 100;
 
 var buttonArr = [[100,415],[100+200+50,415],[100+200+50,415+35+10],[100,415+35+10]]
-var buttonText = ["Redu. HP","Animate","Ene HP","Game Condition"]
+var buttonText = ["Redu. HP","Animate","See Team","Game Condition"]
 
 var animation_f;
 var player_X = PLAYER_ORI_POS;
@@ -22,34 +23,71 @@ var con_mov;
 var poke_actor_img = new Image();
 var poke_trainer_img = new Image();
 
+var finish_round;
+var show_team;
+
+var poke_move = [];
+var ene_move = [];
+var poke_actors = [];
+var ene_actors = [];
+
+var background_img = new Image();
 
 $(document).ready(function (){
+   ini_game();
+   game_start();
+
+});
+
+
+
+function ini_game(){
+   poke_actors = [];
+   ene_actors = [];
+   for (var i = 0; i < 6; i++){
+      let ran_poke = Math.floor((Math.random() * 151) + 1);
+      console.log(ran_poke)
+      $.ajax({
+         url: '../PHP/get_methods_poke.php',
+         data: {"get_all_data": ran_poke},
+         async: false,
+         success(e){
+            poke_actors.push(JSON.parse(e));
+         }
+      });
+   }
+   poke_json = poke_actors[poke_choice];
+   //Getting pokemon for ene
+   for (var i = 0 ; i < 6 ; i++){
+      let ran_poke = Math.floor((Math.random() * 151) + 1);
+      console.log(ran_poke)
+      $.ajax({
+         url: '../PHP/get_methods_poke.php',
+         data: {"get_all_data": ran_poke},
+         async: false,
+         success(e){
+            ene_actors.push(JSON.parse(e));
+         }
+      });
+
+   }
+   poke_json_ene = ene_actors[0];
+
+}
+
+function game_start(){
    var c = document.getElementById("battle_game")
    var ctx = c.getContext('2d')
    ctx.imageSmoothingEnabled = false; // make it not blurry
-
+   finish_round = false;
+   show_team = false;
    //Getting pokemon for player
-   $.ajax({
-      url: '../PHP/get_methods_poke.php',
-      data: {"get_all_data": poke_actor},
-      async: false,
-      success(e){
-         poke_json = JSON.parse(e);
-      }
-   });
-   //Getting pokemon for ene
-   $.ajax({
-      url: '../PHP/get_methods_poke.php',
-      data: {"get_all_data": poke_ene},
-      async: false,
-      success(e){
-         poke_json_ene = JSON.parse(e);
-      }
-   });
+
 
    background_arr = ['island.png','mountain.png','plains.png'];
-   var background_img = new Image();
-   background_img.src = '../img/island.png';
+   let ran_bg = Math.floor((Math.random() * 3));
+
+   background_img.src = '../img/'+background_arr[ran_bg];
    background_img.onload = function () {
       console.log(background_img)
       ctx.drawImage(background_img, 0, -90)
@@ -59,29 +97,81 @@ $(document).ready(function (){
    }
 
    c.addEventListener('click', function (e){
-      var button_choice = button_handler(c, ctx, e)
-      if (button_choice === 0){
-         poke_health-=10;
-         dmg_take = 10;
-         requestAnimationFrame(reduce_hp_anim)
+      if (!finish_round && !show_team){
+         var button_choice = button_handler(c, ctx, e)
+         if (button_choice === 0){
+            poke_health-=10;
+            dmg_take = 10;
+            requestAnimationFrame(reduce_hp_anim)
+         }
+         else if (button_choice=== 1){
+            animation_f = 30;
+            con_mov = true;
+            requestAnimationFrame(animate_user)
+         }
+
+         else if (button_choice === 2){
+            create_win(ctx);
+            finish_round = true;
+
+         }
+         else if (button_choice === 3){
+            show_team = true;
+            load_team(ctx);
+
+
+         }
       }
-      else if (button_choice=== 1){
-         animation_f = 30;
-         con_mov = true;
-         requestAnimationFrame(animate_user)
+      else{
+         const canvas = c.getBoundingClientRect();
+         var mouseX = ((e.clientX - canvas.left) / (canvas.right - canvas.left)) * c.width;
+         var mouseY = ((e.clientY - canvas.top) / (canvas.bottom  - canvas.top)) * c.height;
+         if (finish_round){
+            if (mouseX > 310 && mouseX < 510 && mouseY>300&& mouseY < 330){
+               ini_game();
+               game_start();
+            }
+         }
+         else if (show_team){
+            var team_choice = button_team(ctx);
+            if (team_choice === poke_choice){
+               console.log("Same")
+            }
+            else {
+               switch (team_choice){
+                  case 1:
+                     console.log(1);
+                     break;
+                  case 2:
+                     console.log(2);
+                     break;
+                  case 3:
+                     console.log(3);
+                     break;
+                  case 4:
+                     console.log(4);
+                     break;
+                  case 5:
+                     console.log(5);
+                     break;
+                  case 6:
+                     console.log(6);
+                     break;
+               }
+            }
+            if (mouseX > 470 && mouseX < 670 && mouseY > 425 && mouseY < 460){
+               load_UI(ctx)
+               show_team = false;
+            }
+         }
+
       }
 
-      else if (button_choice === 3){
-
-      }
 
    })
-   function create_win(){
-      
-   }
    // Animation functions
    function reduce_hp_anim(){
-      if (dmg_take>0){
+      if (dmg_take>0 && poke_health>=0){
          poke_health--;
          hp_UI(ctx)
          requestAnimationFrame(reduce_hp_anim)
@@ -117,8 +207,19 @@ $(document).ready(function (){
       }
       animation_f--;
    }
+}
 
-});
+
+function create_win(ctx){
+   ctx.fillStyle = "#ffbaae";
+   ctx.fillRect(0,0, CANVAS_WIDTH, CANVAS_TRUE_HEIGHT);
+   ctx.font = '20px Arial';
+   ctx.fillStyle = '#6e6c6c'
+   ctx.fillText("WIN", CANVAS_WIDTH/2, CANVAS_TRUE_HEIGHT/2);
+
+   buttons_UI(ctx, (CANVAS_WIDTH/2)-50,(CANVAS_TRUE_HEIGHT/2)+50, "Next Trainer");
+
+}
 
 function animate_user_load(ctx){
    ctx.translate(IMG_OFFSET, IMG_HEIGHT);
@@ -160,6 +261,32 @@ function button_handler(c, ctx, e){
 
 }
 
+function load_team(ctx){
+   ctx.fillStyle = "#ffbaae";
+   ctx.fillRect(0,400,CANVAS_WIDTH, 100)
+   ctx.fillStyle = '#F5F5F5FF';
+   var posX = 10;
+   var imgX = -5;
+   for (var i = 0; i < 6; i++){
+      let poke_img_loop = new Image();
+      ctx.fillRect(posX,425,50, 50);
+      posX += 60;
+      poke_img_loop.src=poke_actors[i]['img_link'];
+      poke_img_loop.onload = function () {
+         ctx.drawImage(poke_img_loop, imgX, 400);
+         imgX+=60;
+      }
+
+      console.log(poke_img_loop)
+
+
+   }
+   buttons_UI(ctx, CANVAS_WIDTH-250,425, "Back")
+}
+
+function button_team(ctx){
+
+}
 
 function load_UI(ctx){
 
@@ -246,5 +373,4 @@ function load_trainer(ctx){
       console.log(poke_trainer_img)
    }
 }
-
 
