@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>Battle</title>
     <link rel="stylesheet" href="../CSS/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="../javascript/__ini__.js"></script>
+
 </head>
 <body>
     <div class="wrapper">
@@ -14,20 +18,16 @@
                     <li class="navbar-item nav-f"> <a href='battle.html' class="nav-link">Battle</a></li>
                     <li class="navbar-item"><a href='catch.html' class="nav-link">Catching</a></li>
                 </ul>
-                <hr role="separator" class="element">
-                <ul class="navbar-nav">
-                    <li class="navbar-item nav-f"><a href='register.html' class="nav-link">Register</a></li>
-                    <li class="navbar-item nav-f"><a href='login.html' class="nav-link">Log In</a></li>
-                </ul>
             </div>
         </nav>
 
 
-        <div class="game_container">
+        <div class="game_container" id="game_con">
             <div class="game">
                 <canvas id="battle_game" width="720" height="500"></canvas>
             </div>
         </div>
+
     </div>
 </body>
 </html>
