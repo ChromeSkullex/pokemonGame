@@ -10,8 +10,8 @@ var poke_json;
 var poke_json_ene;
 var poke_choice;
 
-
-var poke_health = 100;
+var poke_maxHealth;
+var poke_health;
 
 var buttonArr = [[100,415],[100+200+50,415],[100+200+50,415+35+10],[100,415+35+10]]
 var buttonText = ["Redu. HP","Animate","See Team","Game Condition"]
@@ -32,6 +32,12 @@ var poke_actors = [];
 var ene_actors = [];
 
 var background_img = new Image();
+
+/*
+* No comments cause I was rushed by my team
+*
+* */
+
 
 $(document).ready(function (){
    ini_game();
@@ -58,6 +64,9 @@ function ini_game(){
       });
    }
    poke_json = poke_actors[poke_choice];
+   poke_health = JSON.parse(poke_json['base_stat'])['hp']['base_num']
+   poke_maxHealth = JSON.parse(poke_json['base_stat'])['hp']['base_num'];
+
    //Getting pokemon for ene
    for (var i = 0 ; i < 6 ; i++){
       let ran_poke = Math.floor((Math.random() * 151) + 1);
@@ -145,11 +154,15 @@ function game_start(){
                poke_json = poke_actors[team_choice];
                console.log(poke_json);
                ctx.drawImage(background_img, 0, -90)
-               load_trainer(ctx);
-               load_player(ctx);
-               load_UI(ctx)
+
                poke_choice= team_choice;
+               poke_health = JSON.parse(poke_json['base_stat'])['hp']['base_num']
+               poke_maxHealth = JSON.parse(poke_json['base_stat'])['hp']['base_num'];
+               console.log(poke_health , "and", poke_maxHealth)
                show_team = false;
+               load_trainer(ctx);
+               load_new_player(ctx);
+               load_UI(ctx)
             }
             if (mouseX > 470 && mouseX < 670 && mouseY > 425 && mouseY < 460){
                load_UI(ctx)
@@ -208,7 +221,6 @@ function create_win(ctx){
    ctx.font = '20px Arial';
    ctx.fillStyle = '#6e6c6c'
    ctx.fillText("WIN", CANVAS_WIDTH/2, CANVAS_TRUE_HEIGHT/2);
-
    buttons_UI(ctx, (CANVAS_WIDTH/2)-50,(CANVAS_TRUE_HEIGHT/2)+50, "Next Trainer");
 
 }
@@ -286,9 +298,6 @@ function button_team(ctx, c, e){
       }
       posX+=60;
    }
-
-
-
    return -1;
 }
 
@@ -351,7 +360,19 @@ function hp_UI(ctx){
    var health_width = ((1/3)*CANVAS_WIDTH)*(4/5)
    ctx.fillRect(10,25, health_width, 10);
    ctx.fillStyle = "#96d152";
-   ctx.fillRect(10,25, health_width*(poke_health/100), 10);
+   if (poke_health > 0){
+      ctx.fillRect(10,25, health_width*(poke_health/poke_maxHealth), 10);
+   }
+   else{
+      ctx.fillRect(10,25, health_width*(0), 10);
+   }
+
+
+   ctx.fillStyle = "#ffffff";
+   ctx.fillRect(205,25, 30, 10);
+   ctx.fillStyle = '#4b4646'
+   ctx.font = '12px Arial';
+   ctx.fillText((poke_health+"/"+poke_maxHealth),205, 35);
 
 }
 
@@ -365,6 +386,15 @@ function load_player(ctx) {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
 
    }
+}function load_new_player(ctx) {
+
+   poke_actor_img.src = poke_json['img_link'];
+   poke_actor_img.onload = function () {
+      ctx.translate(IMG_OFFSET, IMG_HEIGHT);
+      ctx.scale(-1, 1);
+      ctx.drawImage(poke_actor_img, player_X, IMG_HEIGHT - CANVAS_HEIGHT / 2, IMG_SCALE, IMG_SCALE)
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+   }
 }
 
 
@@ -377,4 +407,5 @@ function load_trainer(ctx){
       console.log(poke_trainer_img)
    }
 }
+
 
