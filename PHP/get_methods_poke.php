@@ -11,25 +11,34 @@ if ($link === false){
     die ("could not connect". mysqli_connect_error());
 }
 
-if(isset($_GET['get_img'])){
-    echo get_img($_GET['get_img'], $link);
-
-}
-else if(isset($_GET['get_all_data'])){
+if(isset($_GET['get_all_data'])){
     echo get_all_data($_GET['get_all_data'], $link);
 
 }
+else if(isset($_GET['get_all_move'])){
+    echo $_GET['get_all_move'];
+    echo get_all_move($_GET['get_all_move'], $link);
 
-function get_img($poke_id, $link){
-    $sql = "SELECT * FROM poke_stat WHERE id_name='$poke_id'";
+}
+
+function get_all_move($id_name, $link){
+    $sql = "SELECT * FROM moveset WHERE id_name='$id_name'";
     $result = mysqli_query($link, $sql);
     if (!$result){
         echo "NULL";
     }else{
         $row = $result->fetch_assoc();
-        return $row['img_link'];
-    }
+        $json_move = new stdClass();
+        $json_move->id = $row['id'];
+        $json_move->id_name = $row['id_name'];
+        $json_move->title = $row['title'];
+        $json_move->type = $row['type'];
+        $json_move->cat = $row['cat'];
+        $json_move->stats = $row['stats'];
+        $json_move->effect = $row['effect'];
 
+        return json_encode($json_move,JSON_UNESCAPED_SLASHES);
+    }
 }
 
 function get_all_data($id_num, $link){

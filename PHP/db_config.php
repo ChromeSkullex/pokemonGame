@@ -32,8 +32,8 @@
                         $display_name = $json_poke[$poke_name_id]['title'];
                         $img_link = $json_poke[$poke_name_id]['img'];
                         $type_name =json_encode( $json_poke[$poke_name_id]['type']) ;
-                        $allowed_moveset = json_encode($json_poke[$poke_name_id]['efficiency']);
-                        $efficiency = json_encode($json_poke[$poke_name_id]['allowed_moves']);
+                        $allowed_moveset = json_encode($json_poke[$poke_name_id]['allowed_moves']);
+                        $efficiency = json_encode($json_poke[$poke_name_id]['efficiency']);
                         $base_stat = json_encode($json_poke[$poke_name_id]['base_stat']);
                         //echo "$display_name, $img_link    ";
                         $sql_find = "SELECT COUNT(*) FROM poke_stat WHERE id_name='".$poke_name_id. "'";
