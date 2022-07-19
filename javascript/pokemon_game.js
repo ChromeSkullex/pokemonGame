@@ -9,7 +9,7 @@ const PLAYER_ORI_POS = -2 * IMG_OFFSET;
 var poke_json;
 var poke_json_ene;
 var poke_choice;
-
+var active_moveset = [];
 var poke_maxHealth;
 var poke_health;
 
@@ -22,6 +22,8 @@ var con_mov;
 
 var poke_actor_img = new Image();
 var poke_trainer_img = new Image();
+
+
 
 var finish_round;
 var show_team;
@@ -38,11 +40,9 @@ var background_img = new Image();
 *
 * */
 
-
 $(document).ready(function (){
    ini_game();
    game_start();
-
 });
 
 
@@ -60,6 +60,17 @@ function ini_game(){
          async: false,
          success(e){
             poke_actors.push(JSON.parse(e));
+            var all_move = JSON.parse(poke_actors[0]['allowed_moveset'])
+            var move_key = Object.keys(all_move)
+            console.log(move_key)
+            for (var j = 0; j< 4;j++){
+               console.log(poke_actors[i])
+               let ran_move = Math.floor((Math.random() * move_key.length));
+               let get_move = move_key[ran_move]
+               console.log(get_move);
+               get_moveset(get_move);
+            }
+
          }
       });
    }
@@ -85,6 +96,8 @@ function ini_game(){
 
 }
 
+
+
 function game_start(){
    var c = document.getElementById("battle_game")
    var ctx = c.getContext('2d')
@@ -107,6 +120,7 @@ function game_start(){
    }
 
    c.addEventListener('click', function (e){
+      console.log(show_team+"asduidhsauhdiuasohduasihd")
       if (!finish_round && !show_team){
          var button_choice = button_handler(c, ctx, e)
          if (button_choice === 0){
@@ -138,8 +152,7 @@ function game_start(){
          var mouseY = ((e.clientY - canvas.top) / (canvas.bottom  - canvas.top)) * c.height;
          if (finish_round){
             if (mouseX > 310 && mouseX < 510 && mouseY>300&& mouseY < 330){
-               ini_game();
-               game_start();
+               location.reload();
             }
          }
          else if (show_team){
